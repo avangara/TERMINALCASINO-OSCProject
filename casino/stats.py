@@ -2,11 +2,12 @@ from dataclasses import dataclass
 
 from .utils import cprint, cinput, clear_screen
 
-
 @dataclass
 class GameStats:
     game_name: str
-    starting_balance: int
+    starting_balance: int =0
+    winning_player: str = ""
+    total_moves: int = 0
     ending_balance: int = 0
     rounds_played: int = 0
     wins: int = 0
@@ -43,6 +44,13 @@ def display_stats(stats: GameStats) -> None:
         ("Ending Balance", str(stats.ending_balance)),
         ("Net Profit/Loss", net_str),
     ]
+    if stats.game_name == "UNO":
+        rows = [
+            ("Game", stats.game_name),
+            ("Winner", str(stats.winning_player)),
+            ("Total Moves", str(stats.total_moves)),
+            ("Rounds Played", str(stats.rounds_played)),
+        ]
 
     label_width = max(len(r[0]) for r in rows)
     value_width = max(len(r[1]) for r in rows)
